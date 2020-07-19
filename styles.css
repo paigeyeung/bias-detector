@@ -1,7 +1,15 @@
 .warning {
     color: red;
-    font-family: system-ui;
-    font-size: 1rem;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 0.8rem;
+    display: flex;
+    width: 100%;
+}
+
+.biasScore {
+    color: gray;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 0.8rem;
     display: flex;
     width: 100%;
 }
