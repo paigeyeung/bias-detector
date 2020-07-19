@@ -1,0 +1,136 @@
+*******************************************
+*    This is the latest working code.     *
+*  If Nono messes up use this as backup.  *
+*******************************************
+
+
+#Nono's text extraction
+import csv
+import pandas as pd
+import nltk 
+import re
+import heapq 
+from goose3 import Goose
+from collections import Counter
+print("1")
+
+nltk.download('punkt')
+
+print("2")
+
+# g = Goose()
+# urls = []
+# with open("newsArticlesWithLabels.tsv") as fd:
+#     rd = csv.reader(fd, delimiter="\t", quotechar='"')
+#     for row in rd:
+#         urls.append(row[0])
+#     urls.remove(urls[0])
+#     for i in range(len(urls)):
+#         g.extract(url=urls[i]).cleaned_text
+        
+        
+g = Goose()
+biased = list() #list of news articles labeled "Opinion"
+fair = list() #list of news articles labeled "News"
+other =list() #list of news articles labeled "Other"
+data = open("newsArticlesWithLabels.tsv")
+rd = csv.reader(data, delimiter="\t", quotechar='"')
+for row in rd: 
+  if row[1] == "Opinion":
+    biased.append(row[0])
+  elif row[1] == "News":
+    fair.append(row[0])
+  else:
+    other.append(row[0])
+
+#small data for speedy testing
+biased = biased[:500]
+fair = fair[:500]
+print("3")
+
+#Sophie's tokenization
+#bias
+biasText = ""
+for url in biased:
+  try:
+    print("3.1")
+    biasText += g.extract(url=url).cleaned_text
+    print("3.2")
+  except:
+    print("can't load article" + url)
+
+print("4")
+
+#fair
+fairText = ""
+for url in fair:
+  try:
+    print("4.1")
+    fairText += g.extract(url=url).cleaned_text
+    print("4.2")
+  except:
+    print("can't load article" + url)
+
+print("5")
+#tokenize the biasText
+store_tokens = open('bias.txt', 'w')
+dataset = nltk.sent_tokenize(biasText) 
+for word in dataset: 
+    word = word.lower() 
+    word = re.sub(r'\W', ' ', word) 
+    word = re.sub(r'\s+', ' ', word)
+    store_tokens.write(word)
+store_tokens.close()
+print("6")
+#tokenize the fairText
+store_tokens = open('neutral.txt', 'w')
+fairdata = nltk.sent_tokenize(fairText) 
+for word in fairdata: 
+    word = word.lower() 
+    word = re.sub(r'\W', ' ', word) 
+    word = re.sub(r'\s+', ' ', word)
+    store_tokens.write(word)
+store_tokens.close()
+
+print("7")
+#getting specific words that are "biased"
+biasedWords = []
+store_tokens = open('exclusive-bias.txt', 'w')
+for word in data:
+  if word in dataset and word not in fairdata:
+    biasedWords.append(word)
+    store_tokens.write(word)
+store_tokens.close()
+
+print("8")
+#tokenize the tweet
+tweet = input("Enter your tweet here: ")
+twtData = nltk.sent_tokenize(tweet) 
+for word in twtData: 
+    word = word.lower() 
+    word = re.sub(r'\W', ' ', word) 
+    word = re.sub(r'\s+', ' ', word)
+
+print("9")
+#check for bias (counter)
+bias = 0
+for l in twtData:
+	if l in biasedWords:
+		bias += 1
+
+print("10")
+#Kaitlyn's bias meter
+countlength = tweet.split()
+length = len(countlength)
+
+percentbias = bias/length*100
+
+try:
+  userpercent = int(input("Enter the percent of biased words in a particular article for you to deem it biased (from 1 to 100)"))
+except:
+  userpercent = int(input("Your input is not a number, try again: "))
+
+if percentbias > userpercent: 
+	print("Most likely contains bias")
+else:
+	print("May contain bias, but below user percentage")
