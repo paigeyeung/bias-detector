@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+  
+    "name": "Bias Detector",
+    "description": "Detects & tracks bias in social media posts",
+    "version": "1.0",
+  
+    "content_scripts": [
+        {
+          "css": [
+            "styles.css"
+          ],
+          "js": [
+            "script.js"
+          ],
+          "matches": [
+            "https://old.reddit.com/*"
+          ]
+        }
+    ]
+}
