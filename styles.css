@@ -1,15 +1,18 @@
 .warning {
-    color: red;
+    color: rgb(255,69,0);
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 0.8rem;
     display: flex;
-    width: 100%;
+    width: fit-content;
 }
 
 .biasScore {
-    color: gray;
+    color: white;
+    background-color: rgb(79,134,181);
+    border-radius: 1rem;
+    padding: 0 0.4rem;
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 0.8rem;
-    display: flex;
-    width: 100%;
+    display: block;
+    width: fit-content;
 }
