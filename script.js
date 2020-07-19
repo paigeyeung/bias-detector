@@ -1,29 +1,60 @@
-setTimeout(function() {
+let posts = document.querySelectorAll("div[class='top-matter']");
 
-//     // let elements = await self.page.$$('#siteTable > div[class*="thing"]')
+posts.forEach(function(post){
+  let titleHtml = post.querySelector("p[class='title']")
+  let title = titleHtml.querySelector("a").textContent;
+  console.log(title);
 
-//     // for(let element of elements) {
-//     //     let title = await element.$eval(('p[class="title"]'), node => node.innerText.trim());
-//     //     console.log(title);
 
-        
-//     // }
+  title = title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+  tokenized_title_temp = title.split(' ');
+  console.log(tokenized_title_temp);
 
-    let posts = document.querySelectorAll("div[class='top-matter']");
-    //let titles = document.querySelectorAll("p[class='title'");
+  let tokenized_title = [];
 
-    posts.forEach(function(post){
-      let title = post.querySelector("p[class='title']");
-      console.log(title.querySelector("a"));
+  tokenized_title_temp.forEach(function(word){
+    tokenized_title.push(word.toLowerCase());
+    console.log(word.toLowerCase());
+  });
 
-      let warning = document.createElement("div")
-      warning.classList.add("warning");
+  bias = 0
 
-      let warningText = document.createElement("p");
-      warningText.textContent = `This post may be biased`;
-      warning.appendChild(warningText);
+  let biasedWordsString = "microsoft worked with the national security agency and the fbi to provide the agencies with the encryption workarounds they needed for access to skype video calls outlook web chats and email and information stored on microsoft s cloud based skydrive according to new information shared by nsa leaker edward snowden with the guardian newspaper in the latest round of disclosures about data gathering practices of law enforcement in a program known as prism microsoft has collaborated closely with u s intelligence services to allow users communications to be intercepted including helping the national security agency to circumvent the company s own encryption according to top secret documents obtained by the guardian the newspaper reported thursday the new files provided by edward snowden illustrate the scale of cooperation between silicon valley and the intelligence agencies over the last three years the guardian said microsoft in a statement to nbc news did not address the encryption workaround specifically but said we only ever comply with orders about specific accounts or identifiers and we would not respond to the kind of blanket orders discussed in the press over the past few weeks as the volumes documented in our most recent disclosure clearly illustrate  to be clear microsoft does not provide any government with blanket or direct access to skydrive outlook com skype or any microsoft product the company said when it upgrades or updates products legal obligations may in some circumstances require that we maintain the ability to provide information in response to a law enforcement or national security request there are aspects of this debate that we wish we were able to discuss more freely that s why we ve argued for additional transparency that would help everyone understand and debate these important issues aclu principal technologist chris soghoian told nbc news that the new revelations show that time and time again companies that specifically advertise their services as privacy protecting have been forced to circumvent those privacy protections to enable the government to spy on their customers microsoft isn t the only technology company believed to be cooperating with the government to share data but it is the first to have more details revealed since the initial disclosures last month by snowden at that time he said that microsoft and other technology companies like google facebook apple yahoo and aol were allowing the fbi and nsa to look at americans video audio photos emails and other data files under what is known as the prism program most of the companies including microsoft have since requested government permission to share the information requests that have been made to them according to the information shared by snowden with the guardian microsoft helped the nsa to circumvent its encryption to address concerns that the agency would be able to intercept web chats on the new outlook com portal microsoft completed the transfer of its 300 million hotmail users to outlook com a more modern webmail experience in may the nsa already had pre encryption stage access to email on outlook com including hotmail the guardian said the redmond wash based company also worked with the fbi s data intercept unit to understand potential issues with a feature in outlook com that allows users to create email aliases the newspaper said video chat service skype worked with intelligence agencies last year to allow prism to collect video of conversations as well as audio the guardian said there have been concerns since microsoft bought skype in 2011 about what data the redmond company is sharing with law enforcement last january dozens of organizations including the electronic frontier foundation and digital rights foundation sent an open letter to microsoft asking how when and why the popular video chatting program complies with government requests for information in march microsoft published a transparency report about skype and other of its services  microsoft and skype received a total of 75 378 law enforcement requests the company said in the report  those requests potentially impacted 137 424 accounts while it is not possible to directly compare the number of requests to the number of users affected it is likely that less than 0 02 percent of active users were affected the guardian reports that microsoft also worked with the fbi this year to allow the nsa easier access via prism to its cloud storage service skydrive which now has more than 250 million users worldwide in its statement thursday microsoft said it has clear principles which guide the response across our entire company to government demands for customer information for both law enforcement and national security issues the company takes its commitments to our customers and to compliance with applicable law very seriously so we provide customer data only in response to legal processes microsoft s compliance team examines all demands very closely and we reject them if we believe they aren t valid snowden 30 has worked with the guardian since last month to share information he learned in his time as an nsa contractor about data gathering practices of the nsa one of the country s most secretive agencies he is now believed to be staying in the transit zone of moscow s sheremetyevo airport as he decides where he can go for asylum and where he can avoid being extradited to the united states federal prosecutors have charged snowden with three counts of espionage in choosing john brennan to be the next director of the central intelligence agency president barack obama is turning to a trusted deputy and architect of the administration s unconventional covert war against radical adversaries a 25 year cia veteran who joined mr obama s 2008 presidential campaign after leaving the agency mr brennan straddled the counterterrorism policies of two administrations drawing on his experience serving under president george w bush when he became mr obama s counterterrorism chief indeed i m sure jeffrey goldberg got it right whatever the reason the president leaked his unhappiness with bibi to goldberg just a few days before the israeli election whether in an effort to influence the vote against bibi serve payback to bibi for a perceived preference for romney or because the president could simply no longer suppress his dissatisfaction it must indeed be unnerving to be the most powerful man on earth and have the elected leader of a tiny middle eastern country defy you especially when that country in your opinion owes you so much you are their only reliable friend who watches helplessly as that little nation continues to isolate itself through its self destructive policies according to goldberg obama has become inured to what he sees as self defeating policies of his israeli counterpart obama said privately and repeatedly israel doesn t know what its own best interests are netanyahu is moving his country down a path toward near total isolation if only israel would recognize the president s genius if only it would stop building in jerusalem and e1 and allow the president to sprinkle his magic peace dust then hamas would beat its rockets into ploughshares and hezbollah would turn its bombs into pruning hooks but no ungrateful to the last bibi insists on disobeying the president and claiming all of jerusalem as israel s undivided capitol no doubt the president is likewise mystified at the israeli people as well how could the polls show that they will this week re elect the intransigent prime minister who is doing so much to harm their country the most powerful man on earth is reduced to watching from the sidelines and complaining to journalists that he knows how to protect israel far better than the israelis themselves and yet perhaps the israelis have finally figured out that they are a sovereign people whom while immensely grateful to america for its friendship and support are still best qualified to judge their security needs better than anyone else perhaps they have come to understand that another democratic president named bill clinton whom noone would argue has a sincere love of the jewish people and a jewish son in law still pushed israel into the oslo agreements that left a thousand israeli civilians blown to bits perhaps they have come to understand that if chuck hagel president obama s nominee for secretary of defense was correct that as a legislator from nebraska he was not an israeli senator i m a united states senator then the prime minister of israel is the likewise the leader of the jewish state who must put the security of the israeli people even before a nod of approval from the president of the united states over the past four years bibi has grown into one of israel s greatest ever leaders the country is booming economically and in terms of security cranes dot the skyline of expanding israeli cities terror incidents are negligible compared to the clinton era and unlike the anemic american economy israel is humming along at about four percent annual growth and if president obama is right that in spite of this prosperity israel is isolated in world opinion then it is arguably no more so than it has been in the past and besides what is better a popular israel riddled with dead jews or an unpopular israel filled with living ones but what president obama does not understand about netanyahu is that the inflexibility he accuses him of is born not of a narrow minded obstinacy but rather of a confident jewish pride and deep seated conviction that has been bibi s lifelong hallmark in my desire in 1990 to launch a robust response to anti israel speeches at the oxford union i booked netanyahu to lecture at the university bibi just 41 years old had already electrified the world as israel s most capable defender at the un bibi agreed to come with a single stipulation if i m already making the trip then work me like a horse we picked him up in a special branch police car and as we drove through the grandeur of oxford s ancient center he commented on the majesty of british academia and its incongruence with some of the petty anti israel sentiment that is often expressed within its halls arriving at st antony s college for a private forum with oxford middle east experts bibi put one foot on a chair and for the next 90 minutes held forth on the justice of israel s cause surrounded as it was by nation s sworn to its destruction as he finished the attacks came in fast and furious in what had to be one of the most hostile audiences he ever addressed he did not blink he did not flinch he did not bend when the last question ended he turned to me to ask what next after two more speeches we took him to my home where we had arranged a dinner with rhodes scholars many of them jewish most critical of israeli policy this time bibi was softer in presentation but just as firm in conviction israel was a righteous nation focused on maintaining democracy and human rights while facing existential threats on nearly every border he spoke to the students of their responsibility to be proud defenders of their people and never bend in the face of opposition the climax of the day was a lecture at the union itself palestinian and jewish protesters rallied outside in their hundreds with the rallying cry net an ya hu you should know we support the p l o bibi left his security bubble and walked over to the protesters  come inside and listen then you can protest i ll answer every question you ask many left their barricades and joined the large crowd inside what followed was one of the great speeches i have heard a mesmerizing presentation of the need for democracy across the middle east and the liberalization of arab governments that deny their citizens their god given human rights at its high point bibi said many of us in israel have buried children and lost brothers in fulfillment of a simple dream for jews to finally live and prosper in a country of their own in peace he did not have to mention whom he was referring to as even his detractors knew of entebbe and the hero brother he had lost again he was bombarded with hostile questions he responded patiently but forcefully when he finished he was given a standing ovation by most of the students in the hall it was a night few of us would forget no israeli prime minister has ever been as american as bibi and yet no prime minister has so successfully resisted the pressure from the leader of a country he loves so much for a country he loves even more and the israeli people in supporting bibi regardless of the absence of a stamp of approval from president obama are finally realizing that israel cannot ultimately be protected from washington but jerusalem especially when the current american administration is not in step with the strong sympathy of the american people for a tiny and just nation fighting for its life shmuley boteach america s rabbi whom the washington post calls the most famous rabbi in america has just published his newest best seller the fed up man of faith challenging god in the face of tragedy and suffering follow him on twitter rabbishmuley this column is dedicated to the memory of machla debakarov the mother of a close friend of rabbi shmuley s please let us know if you re having issues with commenting ";
+  let biasedWords = biasedWordsString.split(' ');
 
-      post.before(warning);
-    })
+  for(index = 0; index < tokenized_title.length; index++){
+    let word = tokenized_title[index]
+    if(biasedWords.indexOf(word) != -1)
+    {
+      bias += 1
+      console.log(`${word} is a biased word`)
+    }
+  }
+
+  length = tokenized_title.length;
+
+  console.log(bias)
+  console.log(length)
+  let percentbias = Math.round(bias/length*100)
+
+  // add bias warning
+  let warning = document.createElement("div")
+  let biasScore = document.createElement("div")
+  warning.classList.add("warning");
+  biasScore.classList.add("biasScore");
+
+  let biasScoreText = document.createElement("p");
+  let warningText = document.createElement("p");
+
+  // warningText.textContent = "This post may be biased";
+  biasScoreText.textContent = `Bias score: ${percentbias}%`;
+  warningText.textContent = `This post may be biased`;
   
-  }, 3000);
+  biasScore.appendChild(biasScoreText);
+  if(percentbias > 40){
+    warning.appendChild(warningText);
+  }
+
+  post.before(biasScore);
+  post.before(warning);
+});
