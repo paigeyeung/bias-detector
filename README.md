@@ -6,4 +6,4 @@
 3. Select the directory for this repository
 
 ## Usage
-This is intended to identify potentially biased posts on the [old version of Reddit](https://old.reddit.com). In the future, we hope to create a similar extension for the new version.
+This is intended to identify potentially biased posts on the [old version of Reddit](https://old.reddit.com).
